@@ -1,4 +1,4 @@
-// CODE here for your Lambda Classes
+// Lambda classes
 
 class Person {
     constructor(attr) {
@@ -27,6 +27,16 @@ class Instructor extends Person {
     grade(student, subject) {
         console.log(`${student.name} receives a perfect score on ${subject}`)
     }
+
+    gradeAssignment(student) {
+        student.grade += Math.floor(Math.random() * 11);
+        if (student.grade > 100) {
+            student.grade = 100
+        
+        } else if (student.grade < 0) {
+            student.grade = 0
+        }
+    }
 }
 
 class Student extends Person {
@@ -35,6 +45,7 @@ class Student extends Person {
         this.previousBackground = studentAttr.previousBackground;
         this.className = studentAttr.className;
         this.favSubjects = studentAttr.favSubjects;
+        this.grade = studentAttr.grade;
     }
 
     listsSubjects() {
@@ -49,6 +60,15 @@ class Student extends Person {
 
     sprintChallenge(subject) {
         console.log(`${this.name} has begun sprint challenge on ${subject}`)
+    }
+
+    graduate() {
+        if (this.grade >= 70) {
+            console.log(`${this.name} is ready to graduate!`);
+        } else {
+            instructor1.gradeAssignment(this);
+        }
+
     }
 }
 
@@ -118,7 +138,8 @@ const student1 = new Student ({
     location: "Binghamton",
     previousBackground: "Literal Child",
     className: "WEB24",
-    favSubjects: ["Math", "Sports", "Science"]
+    favSubjects: ["Math", "Sports", "Science"],
+    grade: 50
 })
 
 const student2 = new Student ({
@@ -127,7 +148,8 @@ const student2 = new Student ({
     location: "New York",
     previousBackground: "Human Bus",
     className: "WEB24",
-    favSubjects: ["Reptile Studies", "Geology", "Grammar"]
+    favSubjects: ["Reptile Studies", "Geology", "Grammar"],
+    grade: 30
 })
 
 student1.listsSubjects();
@@ -163,3 +185,14 @@ const pm2 = new ProjectManager ({
 pm1.standUp("#WEB100");
 
 pm2.debugsCode(student1, "Dancing")
+
+student1.graduate()
+console.log(student1.grade)
+student1.graduate()
+console.log(student1.grade)
+student1.graduate()
+console.log(student1.grade)
+student1.graduate()
+console.log(student1.grade)
+student1.graduate()
+
